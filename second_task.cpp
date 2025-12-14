@@ -9,7 +9,7 @@
 
 using namespace std;
 
-// ============ LOGGER ============
+// логгер для правильного открытия и закрытия файла
 class Logger
 {
     ofstream logFile;
@@ -44,9 +44,9 @@ public:
     }
 };
 
-Logger g_logger;
+Logger g_logger; // глобальная переменная чтобы вызывать
 
-// ============ STRUCTURES ============
+// структуры
 struct Pipe
 {
     static int nextId;
@@ -57,7 +57,7 @@ struct Pipe
     bool underRepair;
 
     Pipe() : id(++nextId), length(0), diameter(0), underRepair(false) {}
-
+    // функции валидации ввода
     double getLength() const { return length; }
     int getDiameter() const { return diameter; }
     bool isUnderRepair() const { return underRepair; }
@@ -112,6 +112,7 @@ int readPositiveInt(const string &prompt)
         cout << "Invalid input. Enter positive number: ";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        // чтобы программа не падала и не зацикливалась при кривом вводе
     }
     return value;
 }
@@ -138,7 +139,7 @@ string readString(const string &prompt)
     return result;
 }
 
-// ============ PIPE OPERATIONS ============
+//  PIPE OPERATIONS
 void addPipe(vector<Pipe> &pipes)
 {
     Pipe pipe;
@@ -170,7 +171,7 @@ void displayAllPipes(const vector<Pipe> &pipes)
         displayPipe(p);
 }
 
-vector<Pipe *> searchPipesByName(vector<Pipe> &pipes, const string &name)
+vector<Pipe *> searchPipesByName(vector<Pipe> &pipes, const string &name) // возвращаются указатели на элементы внутри исходного
 {
     vector<Pipe *> results;
     for (auto &p : pipes)
@@ -320,7 +321,7 @@ void editStation(CompressorStation &st)
     cin >> choice;
     if (choice == 1)
     {
-        st.adjustWorkshops(1);
+        st.adjustWorkshops(1); // запуск или остановка цеха
         cout << "Working: " << st.workingWorkshops << "/" << st.totalWorkshops << "\n";
         g_logger.log("Station " + to_string(st.id) + ": started workshop");
     }
@@ -588,3 +589,5 @@ int main()
     }
     return 0;
 }
+// g++ second_task.cpp -o second_task.exe
+// second_task.exe
