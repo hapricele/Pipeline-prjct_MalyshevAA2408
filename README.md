@@ -1,42 +1,46 @@
-# Pipeline Management System - Third Task
+# Система управления газопроводом - Третья задача
 
-## Project Overview
-Enhanced gas transportation pipeline management system with network graph formation and topological sorting.
+## Обзор проекта
 
-## Key Features
+Улучшенная система управления газотранспортной сетью с формированием сетевого графика и топологической сортировкой.
 
-### Task 1: Pipe and Station Management
-- Create and manage pipes with: name, length, diameter, repair status
-- Create and manage compressor stations with workshops data
-- Search and filter pipes/stations by various criteria
-- Edit multiple pipes/stations in batch operations
-- Log all operations to pipeline_log.txt
+## Основные возможности
 
-### Task 2: Gas Transport Network Formation
-- **Connect Stations**: Link compressor stations using pipes
-- **User Input**: Source Station ID, Destination Station ID, Required pipe diameter (500, 700, 1000, 1400 mm)
-- **Smart Pipe Allocation**: Find available pipe or create new one
-- Ensure pipes are not under repair before using
+### Задача 1: Управление трубопроводами и компрессорными станциями
 
-### Task 3: Topological Sorting
-- Build directed acyclic graph from connections
-- Implement Kahn's Algorithm for topological sorting
-- O(V + E) time complexity
-- Display network graph structure
-- Export network topology to file
+- Создание и управление трубопроводами: имя, длина, диаметр, статус ремонта
+- Создание и управление компрессорными станциями с данными о мастерских
+- Поиск и фильтрация трубопроводов/станций по различным критериям
+- Редактирование нескольких трубопроводов/станций в пакетных операциях
+- Логирование всех операций в файл pipeline_log.txt
 
-## Data Structures
+### Задача 2: Формирование газотранспортной сети
+
+- **Соединение станций**: связывание компрессорных станций с помощью трубопроводов
+- **Пользовательский ввод**: ID исходной станции, ID целевой станции, требуемый диаметр трубопровода (500, 700, 1000, 1400 мм)
+- **Интеллектуальное распределение труб**: поиск доступного трубопровода или создание нового
+- Обеспечение того, чтобы трубопроводы не находились на ремонте перед использованием
+
+### Задача 3: Топологическая сортировка
+
+- Построение ориентированного ациклического графа из соединений
+- Реализация алгоритма Кана для топологической сортировки
+- Временная сложность O(V + E)
+- Отображение структуры сетевого графика
+- Экспорт топологии сети в файл
+
+## Структуры данных
 
 ```cpp
 struct Edge {
-    int pipeId;        // Connected pipe
-    int toStationId;   // Destination
-    int diameter;      // Diameter mm
+  int pipeId;        // Подключенный трубопровод
+  int toStationId;   // Целевая станция
+  int diameter;      // Диаметр мм
 };
 
 struct NetworkGraph {
-    map<int, vector<Edge>> adjacencyList;
-    map<int, int> inDegree;
-    vector<int> topologicalSort();
+  map<int, vector<Edge>> adjacencyList;
+  map<int, int> inDegree;
+  vector<int> topologicalSort();
 };
 ```
